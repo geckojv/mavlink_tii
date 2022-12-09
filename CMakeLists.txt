@@ -180,6 +180,7 @@ set(v1.0Definitions
     python_array_test.xml
     test.xml
     ualberta.xml
+    tii.xml
     )
 generateMavlink("1.0" "${v1.0Definitions}")
 generateMavlink("2.0" "${v1.0Definitions}")

@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<mavlink>
+    <include>common.xml</include>
+    <dialect>2</dialect>
+    <enums>
+        <enum name="LM_DETECTION_CONTROL_MODE">
+            <description>For the computer vision payload.</description>
+            <entry value="0" name="LM_DETECTION_CONTROL_MODE_IDLE">
+                <description>Detection and tracking should not be active</description>
+            </entry>
+            <entry value="1" name="LM_DETECTION_CONTROL_MODE_DETECTION_TRACKING">
+                <description>Detection and tracking should be active</description>
+            </entry>
+        </enum>
+    </enums>
+    <messages>
+        <message id="9995" name="LM_DETECTION_CONTROL">
+            <description>Perception Detection and Tracking Control.</description>
+            <field type="uint64_t" name="time_stamp" units="us">Timestamp</field>
+            <field type="uint8_t" name="target_system">System ID (0 for broadcast).</field>
+            <field type="uint8_t" name="target_component">Component ID (0 for broadcast).</field>
+            <field type="uint8_t" name="detection_control_mode" units="LM_DETECTION_CONTROL_MODE">Control mode</field>
+        </message>
+
+        <message id="9998" name="TARGET_INERTIAL_STATUS">
+            <description> inertial measurements of the target to the FCU.</description>
+            <field type="uint64_t" name="time_usec" units="us">Timestamp</field>
+            <field type="uint8_t" name="target_system">System ID (0 for broadcast).</field>
+            <field type="uint8_t" name="target_component">Component ID (0 for broadcast).</field>
+            <field type="int8_t" name="target_valid">Boolean value indicating if a valid target has been detected, 0 invalid, 1 valid</field>
+            <field type="int32_t" name="latitude" units="degE7">Latitude (WGS84)</field>
+            <field type="int32_t" name="longitude" units="degE7">Longitude (WGS84)</field>
+            <field type="int32_t" name="altitude" units="mm">Altitude (MSL). Positive for up.</field>
+            <field type="uint16_t" name="heading" units="cdeg">Course over ground</field>
+            <field type="uint16_t" name="hor_velocity" units="cm/s">The horizontal velocity</field>
+            <field type="int16_t" name="ver_velocity" units="cm/s">The vertical velocity. Positive is up</field> 
+        </message>
+
+        <message id="9999" name="TARGET_CV_STATUS">
+            <description>Perception Detection and Tracking Status.</description>
+            <field type="uint64_t" name="time_stamp" units="us">Timestamp</field>
+            <field type="uint8_t" name="target_system">System ID (0 for broadcast).</field>
+            <field type="uint8_t" name="target_component">Component ID (0 for broadcast).</field>
+            <field type="int8_t" name="target_valid">Boolean value indicating if a valid target has been detected</field>
+            <field type="uint8_t" name="detection_count">Number of objects detected in frame</field>
+            <field type="uint8_t" name="class_id">ID of the class of the object detected within the class</field>
+            <field type="uint8_t" name="detection_id">ID of the object detected within the class</field>
+            <field type="uint8_t" name="confidence" units="c%">Confidence of the detection in percent</field>
+            <field type="float" name="xc">x coordinate of the center of bounding box</field>
+            <field type="float" name="yc">x coordinate of the center of bounding box</field>
+            <field type="float" name="w">Width of bounding box</field>
+            <field type="float" name="h">Height of bounding box</field>
+        </message>
+
+        <message id="9996" name="GIMBAL_CONTROL">
+            <description>Optical Gimbal Control.</description>
+            <field type="uint64_t" name="time_stamp" units="us">Timestamp</field>
+            <field type="uint8_t" name="target_system">System ID (0 for broadcast).</field>
+            <field type="uint8_t" name="target_component">Component ID (0 for broadcast).</field>
+            <field type="float" name="roll_rate" units="deg/s">Camera Roll/Yaw rate command</field>
+            <field type="float" name="pitch_rate" units="deg/s">Camera Pitch rate command</field>
+            <field type="float" name="fov" units="deg">Camera Horizontal FOV command</field>
+        </message>
+
+        <message id="9997" name="GIMBAL_STATUS">
+            <description>Optical Gimbal Status.</description>
+            <field type="uint64_t" name="time_stamp" units="us">Timestamp</field>
+            <field type="uint8_t" name="target_system">System ID (0 for broadcast).</field>
+            <field type="uint8_t" name="target_component">Component ID (0 for broadcast).</field>
+            <field type="float" name="roll" units="deg">Camera Roll Angle</field>
+            <field type="float" name="pitch" units="deg">Camera Pitch Angle</field>
+            <field type="float" name="fov" units="deg">Camera Horizontal FOV</field>
+            <field type="float" name="los_rate_x" units="deg/s">Los rate along image X axis</field>
+            <field type="float" name="los_rate_y" units="deg/s">Los rate along image Y axis</field>
+            <field type="float" name="camera_temperature" units="cdegC">Camera Temperature</field>
+        </message>
+    </messages>
+</mavlink>
