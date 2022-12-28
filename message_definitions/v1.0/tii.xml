@@ -36,7 +36,8 @@
             <field type="int16_t" name="ver_velocity" units="cm/s">The vertical velocity. Positive is up</field> 
         </message>
 
-        <message id="9999" name="TARGET_CV_STATUS">
+        <!-- REQUESTED FORMAT FROM ADASI -->
+        <!-- <message id="9999" name="TARGET_CV_STATUS">
             <description>Perception Detection and Tracking Status.</description>
             <field type="uint64_t" name="time_stamp" units="us">Timestamp</field>
             <field type="uint8_t" name="target_system">System ID (0 for broadcast).</field>
@@ -46,6 +47,23 @@
             <field type="uint8_t" name="class_id">ID of the class of the object detected within the class</field>
             <field type="uint8_t" name="detection_id">ID of the object detected within the class</field>
             <field type="uint8_t" name="confidence" units="c%">Confidence of the detection in percent</field>
+            <field type="float" name="xc">x coordinate of the center of bounding box</field>
+            <field type="float" name="yc">x coordinate of the center of bounding box</field>
+            <field type="float" name="w">Width of bounding box</field>
+            <field type="float" name="h">Height of bounding box</field>
+        </message> -->
+    
+        <!-- MODIFIED FORMAT FROM TII (only float) -->
+        <message id="9999" name="TARGET_CV_STATUS">
+            <description>Perception Detection and Tracking Status.</description>
+            <field type="float" name="time_stamp" units="us">Timestamp</field>
+            <field type="float" name="target_system">System ID (0 for broadcast).</field>
+            <field type="float" name="target_component">Component ID (0 for broadcast).</field>
+            <field type="float" name="target_valid">Boolean value indicating if a valid target has been detected</field>
+            <field type="float" name="detection_count">Number of objects detected in frame</field>
+            <field type="float" name="class_id">ID of the class of the object detected within the class</field>
+            <field type="float" name="detection_id">ID of the object detected within the class</field>
+            <field type="float" name="confidence" units="c%">Confidence of the detection in percent</field>
             <field type="float" name="xc">x coordinate of the center of bounding box</field>
             <field type="float" name="yc">x coordinate of the center of bounding box</field>
             <field type="float" name="w">Width of bounding box</field>
@@ -62,7 +80,8 @@
             <field type="float" name="fov" units="deg">Camera Horizontal FOV command</field>
         </message>
 
-        <message id="9997" name="GIMBAL_STATUS">
+        <!-- REQUESTED FORMAT FROM ADASI -->
+        <!-- <message id="9997" name="GIMBAL_STATUS">
             <description>Optical Gimbal Status.</description>
             <field type="uint64_t" name="time_stamp" units="us">Timestamp</field>
             <field type="uint8_t" name="target_system">System ID (0 for broadcast).</field>
@@ -73,6 +92,21 @@
             <field type="float" name="los_rate_x" units="deg/s">Los rate along image X axis</field>
             <field type="float" name="los_rate_y" units="deg/s">Los rate along image Y axis</field>
             <field type="float" name="camera_temperature" units="cdegC">Camera Temperature</field>
+        </message> -->
+
+        <!-- MODIFIED FORMAT FROM TII (only float) -->
+        <message id="9997" name="GIMBAL_STATUS">
+            <description>Optical Gimbal Status.</description>
+            <field type="float" name="time_stamp" units="us">Timestamp</field>
+            <field type="float" name="target_system">System ID (0 for broadcast).</field>
+            <field type="float" name="target_component">Component ID (0 for broadcast).</field>
+            <field type="float" name="roll" units="deg">Camera Roll Angle</field>
+            <field type="float" name="pitch" units="deg">Camera Pitch Angle</field>
+            <field type="float" name="fov" units="deg">Camera Horizontal FOV</field>
+            <field type="float" name="los_rate_x" units="deg/s">Los rate along image X axis</field>
+            <field type="float" name="los_rate_y" units="deg/s">Los rate along image Y axis</field>
+            <field type="float" name="camera_temperature" units="cdegC">Camera Temperature</field>
         </message>
+
     </messages>
 </mavlink>
